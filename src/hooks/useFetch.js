@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const useFetch = (url) => {
@@ -7,43 +7,44 @@ const useFetch = (url) => {
     let [error, setError] = useState(null);
     let navigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
         let abortController = new AbortController();
         let signal = abortController.signal;
 
-        setLoading(true)
-        fetch("https://thailotto123.net/api", {
+        setLoading(true);
+        fetch(url, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json',
               'Authorization' : "Bearer " + localStorage.getItem('token')
-              // Other headers if required
-            }, signal
+            },
+            signal
         })
         .then(res => {
-            if(!res.ok){
-                throw Error("Something Went Wrong!")
+            if (!res.ok) {
+                throw Error("Something Went Wrong!");
             }
-            return res.json()
+            return res.json();
         })
         .then(data => {
-            setData(data);
-            setLoading(false)
+            setData(data.data);
+            setLoading(false);
         })
-        .catch(e =>{
-            setError(e.message)
+        .catch(e => {
+            setError(e.message);
+            setLoading(false);
             // navigate('/login');
-        })
+        });
 
-        //cleanup function
-        return () =>{
+        // Cleanup function
+        return () => {
             abortController.abort();
-        }
+        };
 
-    }, [url])
+    }, [url]);
 
-    return {data, loading, error}
+    return { data, loading, error };
 }
 
-export default useFetch
+export default useFetch;

@@ -47,8 +47,13 @@ export default function Navbar() {
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to={'/blogs'} className="nav-link">
-                                Blogs
+                            <NavLink to={'/home'} className="nav-link">
+                                Thailotto
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to={'/profile'} className="nav-link">
+                                Profile
                             </NavLink>
                         </li>
 
