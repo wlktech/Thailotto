@@ -1,5 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.bundle';
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
@@ -46,22 +46,38 @@ export default function Navbar() {
                                 Home
                             </NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink to={'/home'} className="nav-link">
-                                Thailotto
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to={'/profile'} className="nav-link">
-                                Profile
-                            </NavLink>
-                        </li>
+                        {auth && (
+                            <>
+                            <li className="nav-item">
+                                <NavLink to={'/home'} className="nav-link">
+                                    Thailotto
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink to={'/profile'} className="nav-link">
+                                    Profile
+                                </NavLink>
+                            </li>
+                            </>
+                        )}
+                        
 
-                        {!auth && <li className="nav-item">
+                        {!auth && (
+                        <>
+                        <li className="nav-item">
                             <NavLink to={'/login'} className="nav-link fw-bold">
                                 Login
                             </NavLink>
-                        </li>}
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to={'/register'} className="nav-link fw-bold">
+                                Register
+                            </NavLink>
+                        </li>
+                        </>
+                        )
+
+                        }
 
                         {auth && <li className="nav-item">
                             <button className="nav-link" onClick={handleLogout}>Logout</button>

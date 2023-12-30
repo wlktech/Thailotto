@@ -1,27 +1,38 @@
-import React, { useState } from 'react'
-import useFetch from '../hooks/useFetch';
+import React from 'react';
 import BASE_URL from '../hooks/config';
+import useFetch from '../hooks/useFetch';
 
 export default function HomePage() {
-  let { data, loading, error } = useFetch(BASE_URL);
-  console.log(data);
+
+  const url = `${BASE_URL}/home`;
+  let { data, loading, error } = useFetch(url);
+
+  if (loading) {
+    return (
+      <div className="text-center mt-5">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <>
-      {error && <div>{error}</div>}
-      {loading && (
-        <div className="text-center mt-5">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      )}
-      
-        <div className='container my-3'>
-          <div className="row">
-
-          </div>
-        </div>
+      <div className='container my-3'>
+        <marquee behavior="" direction="" className='py-4 bg-secondary text-light rounded-2'>
+          {data?.banner_text?.text}
+        </marquee>
+      </div>
+      <div className='text-center'>
+        {data?.banners?.map((banner, index) => (
+          <img className='m-3 rounded shadow' src={banner.img_url} alt={`Banner ${index}`} width={300} key={index} />
+        ))}
+      </div>
     </>
-  )
+  );
 }

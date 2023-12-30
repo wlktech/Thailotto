@@ -5,6 +5,9 @@ import NotFound from '../pages/NotFound';
 import Login from "../pages/Login";
 import HomePage from "../pages/HomePage";
 import Profile from "../pages/Profile";
+import Register from "../pages/Register";
+
+let auth = localStorage.getItem('token');
 
 const router = createBrowserRouter([
     {
@@ -15,10 +18,14 @@ const router = createBrowserRouter([
                 path : '/',
                 element : <Home/>
             },
-            {
-                path : '/login',
-                element : <Login />
-            },
+            // Conditional Login Route
+            ...(localStorage.getItem('token') ? [] : [{
+                path: '/login',
+                element: <Login />
+            },{
+                path: '/register',
+                element: <Register />
+            }]),
             {
                 path : '/home',
                 element : <HomePage />
