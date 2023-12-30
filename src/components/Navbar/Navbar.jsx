@@ -23,7 +23,7 @@ export default function Navbar() {
                             <img src="http://localhost:3000/logo.png" className='rounded shadow' width={60} alt="" />
                         </div>
                         <div className=''>
-                            <span className="fw-bold d-block mb-0 pb-0 logo">DELIGHT MYANMAR</span>
+                            <span className="fw-bold d-block mb-0 pb-0 logo">THAILOTTO</span>
                             {/* <span className='sologan mt-0 pt-0'>Grow Your Business With Us.</span> */}
                         </div>
                     </div>
