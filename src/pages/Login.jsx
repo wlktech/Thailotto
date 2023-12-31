@@ -5,7 +5,6 @@ import BASE_URL from '../hooks/config';
 
 const Login = () => {
     let { data: code } = useLogin(BASE_URL+'/login');
-    // console.log(code.country_codes);
     const [countryCode, setCountryCode] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
