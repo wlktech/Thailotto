@@ -12,6 +12,11 @@ const Login = () => {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
 
+    const auth = localStorage.getItem('user');
+    if(auth){
+      navigate('/');
+    }
+
     const handleLogin = (e) =>{
         e.preventDefault();
         const loginData = {

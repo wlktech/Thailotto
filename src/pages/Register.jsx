@@ -13,6 +13,11 @@ const Register = () => {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
 
+    const auth = localStorage.getItem('user');
+    if(auth){
+      navigate('/');
+    }
+
     const handleRegister = (e) =>{
         e.preventDefault();
         const registerData = {

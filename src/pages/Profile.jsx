@@ -38,7 +38,7 @@ export default function Profile() {
             <h1 className='text-center mb-3'>PROFILE</h1>
             <div className="text-center">
               {data.user.img_url && (
-                <img src={data.user.img_url} width={150} className='rounded-circle' alt="" />
+                <img src={data.user.img_url} width={150} height={150} className='rounded-circle' alt="" />
               )}
               {!data.user.img_url && (
                 <i className="fas fa-circle-user fa-2x text-dark"></i>

@@ -8,8 +8,6 @@ import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 import EditForm from "../pages/Profile/EditForm";
 
-let auth = localStorage.getItem('token');
-
 
 const router = createBrowserRouter([
     {
@@ -20,14 +18,14 @@ const router = createBrowserRouter([
                 path : '/',
                 element : <Home/>
             },
-            // Conditional Login Route
-            ...(auth ? [] : [{
+            {
                 path: '/login',
                 element: <Login />
-            },{
+            },
+            {
                 path: '/register',
                 element: <Register />
-            }]),
+            },
             {
                 path : '/home',
                 element : <HomePage />
