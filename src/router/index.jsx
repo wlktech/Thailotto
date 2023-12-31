@@ -10,6 +10,7 @@ import EditForm from "../pages/Profile/EditForm";
 
 let auth = localStorage.getItem('token');
 
+
 const router = createBrowserRouter([
     {
         path : "/",
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
                 element : <Home/>
             },
             // Conditional Login Route
-            ...(localStorage.getItem('token') ? [] : [{
+            ...(auth ? [] : [{
                 path: '/login',
                 element: <Login />
             },{
