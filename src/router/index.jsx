@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import HomePage from "../pages/HomePage";
 import Profile from "../pages/Profile";
 import Register from "../pages/Register";
+import EditForm from "../pages/Profile/EditForm";
 
 let auth = localStorage.getItem('token');
 
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path : '/profile',
                 element : <Profile />
+            },
+            {
+                path : '/profile/editProfile',
+                element : <EditForm />
             },
             {
                 path : '*',

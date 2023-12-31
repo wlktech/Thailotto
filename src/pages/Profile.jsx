@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import useFetch from '../hooks/useFetch';
 import BASE_URL from '../hooks/config';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const url = `${BASE_URL}/profile`;
-
   let { data, loading, error } = useFetch(url);
 
   const formatBalance = (balance) => {
@@ -38,21 +38,24 @@ export default function Profile() {
             <h1 className='text-center mb-3'>PROFILE</h1>
             <div className="text-center">
               {data.user.img_url && (
-                <img src={data.user.img_url} width={150} alt="" />
+                <img src={data.user.img_url} width={150} className='rounded-circle' alt="" />
               )}
               {!data.user.img_url && (
                 <i className="fas fa-circle-user fa-2x text-dark"></i>
               )}
-              
-              <p className="mt-5">Name: <span className="fw-bold">{data.user.name}</span></p>
-              <p className="">Phone: <span className="fw-bold">{data.user.phone}</span></p>
-              <p className="">Balance (MMK): <span className="fw-bold">{formatBalance(data.user.balance)} MMK</span></p>
-              <p className="">Balance (BAHT): <span className="fw-bold">{formatBalance(data.user.balance/data.currency_rate)} BHT</span></p>
+                <>
+                  <Link to="/profile/editProfile" className='btn btn-sm btn-secondary d-block m-auto mt-4 w-50'>Edit Profile</Link>
+                  <p className="mt-5">Name: <span className="fw-bold">{data.user.name}</span></p>
+                  <p className="">Phone: <span className="fw-bold">{data.user.phone}</span></p>
+                  <p className="">Balance (MMK): <span className="fw-bold">{formatBalance(data.user.balance)} MMK</span></p>
+                  <p className="">Balance (BAHT): <span className="fw-bold">{formatBalance(data.user.balance/data.currency_rate)} BHT</span></p>
+                </>
             </div>
           </div>
         </div>
       </div> 
     )}
+
     </>
   )
 }
