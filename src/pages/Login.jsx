@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import useLogin from '../hooks/useLogin';
+// import useLogin from '../hooks/useLogin';
 import BASE_URL from '../hooks/config';
 
 const Login = () => {
-    let { data: code } = useLogin(BASE_URL+'/login');
+    // let { data: code } = useLogin(BASE_URL+'/login');
     const [countryCode, setCountryCode] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
@@ -68,9 +68,8 @@ const Login = () => {
                         <div className="mb-3 w-25">
                         <select className='form-control form-select' name="countryCode" id="" onChange={(e)=>setCountryCode(e.target.value)}>
                           <option value="">Choose</option>
-                          {code.country_codes && code.country_codes.map((code, index)=>(
-                            <option key={index} value={code.code}>{code.name}</option>
-                          ))}
+                          <option  value="+95">MM(+95)</option>
+                          <option  value="+66">THA(+66)</option>
                         </select>
                         </div>
 
