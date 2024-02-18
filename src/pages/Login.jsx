@@ -9,6 +9,7 @@ const Login = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [data, setData] = useState([]);
+    const [error, setError] = useState([]);
     const navigate = useNavigate();
 
     const auth = localStorage.getItem('user');
@@ -25,24 +26,42 @@ const Login = () => {
         };
         
         fetch(BASE_URL + '/login', {
-            method: 'POST',
-            headers: {
-              'Accept' : "application/json",
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(loginData)
-        }).then(response => {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(loginData)
+        })
+          .then(async response => {
             if (!response.ok) {
-              throw new Error('Login failed');
+              let errorData;
+              try {
+                errorData = await response.json();
+              } catch (error) {
+                console.error('Error parsing JSON:', error);
+              }
+        
+              if (response.status === 422) {
+                setError(errorData.errors);
+                console.error(`Login failed with status ${response.status}:`, errorData);
+              }else if (response.status === 401) {
+                setError(errorData.message);
+                console.error(`Login failed with status ${response.status}:`, errorData);
+              }else{
+                console.error(`Unexpected error with status ${response.status}`);
+              }
+        
+              throw new Error('Login Failed');
             }
+        
             return response.json();
           })
           .then(data => {
-            console.log('Login successful:', data);
             setData(data);
+            console.log(data);
             if (data.data.token) {
-              localStorage.setItem('token', data.data.token); // Save token to localStorage
-              // alert("Logged In Successfully.");
+              localStorage.setItem('token', data.data.token);
               navigate('/profile');
             } else {
               throw new Error('Token not found in response');
@@ -51,6 +70,8 @@ const Login = () => {
           .catch(error => {
             console.error('Login error:', error);
           });
+        
+        
     }
 
   return (
@@ -59,6 +80,11 @@ const Login = () => {
         <div className="row">
             <div className="col-md-6 mx-auto">
                 <div className="card p-3 shadow mt-5">
+                  <p>{error && error.country_code}</p>
+                  <p>{error && error.phone}</p>
+                  <p>{error && error.password}</p>
+                  <p>{error && error}</p>
+                  
                     <h4 className='text-center mb-5'>LOGIN</h4>
                     {/* <p>{ countryCode + phone }</p> */}
                     {/* <p>{ password }</p> */}

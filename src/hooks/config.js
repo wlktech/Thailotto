@@ -1,3 +1,3 @@
-const BASE_URL = 'https://thailotto123.net/api';
+const BASE_URL = 'https://77sportsmm.com/api';
 
 export default BASE_URL;
